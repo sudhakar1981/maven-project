@@ -1,11 +1,31 @@
-
-
-
-node('master') {
-git 'https://github.com/sudhakar1981/maven-project.git'
-
-bat '''mvn clean
-
-mvn compile'''
-}
-
+pipeline {
+	agent any
+	
+	stages { 
+		stage ('compile stage' ) {
+		
+			steps { 
+				withMaven(maven : 'maven_3_5_0') {
+					bat 'mvn clean compile'
+					}
+				}
+			}
+			stage ('Testing Stage') {
+			 
+				steps { 
+					withMaven(maven : 'maven_3_5_0') {
+						bat 'mvn test'
+					}
+				}
+			}
+			
+			stage ('Deployment Stage'){ 
+				
+				steps { 
+					withMaven(maven : 'maven_3_5_0') {
+						bat 'mvn deploy' 
+						}
+					}
+				}
+			}
+		}
