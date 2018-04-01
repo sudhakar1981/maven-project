@@ -4,23 +4,31 @@ pipeline{
 		stages {
 			stage ('Compile Stage') {
 				steps{
-					withmaven(maven : 'MAVEN_HOME') {
-						bat 'mvn clean compile'
+					withMaven(maven : 'MAVEN_HOME') {
+						bat "mvn clean compile"
 						}
 					}
 				}
 			stage ('Testing Stage') {
 				steps {
-					withmaven(maven : 'MAVEN_HOME') { 
-						bat 'mvn test'
+					withMaven(maven : 'MAVEN_HOME') { 
+						bat "mvn test"
 					}
 				}
 			}
 			
-			stage ('Deployment Stage') {
+			stage ('Package Stage') {
 				steps {
-					withmaven(maven : 'MAVEN_HOME') {
-						bat 'mvn deploy'
+					withMaven(maven : 'MAVEN_HOME') {
+						bat "mvn package "
+					}
+				}
+			}
+			
+			stage ('install Stage') {
+				steps {
+					withMaven(maven : 'MAVEN_HOME') {
+						bat "mvn install"
 					}
 				}
 			}
