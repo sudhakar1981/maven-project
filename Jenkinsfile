@@ -27,7 +27,7 @@ pipeline{
 			
 			stage ('install Stage') {
 				steps {
-					withMaven(maven : 'MAVEN_HOME') {
+					withMaven(maven : 'Maven 3.5') {
 						bat "mvn install"
 					}
 				}
