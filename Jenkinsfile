@@ -4,14 +4,14 @@ pipeline{
 		stages {
 			stage ('Compile Stage') {
 				steps{
-					withMaven(maven : 'MAVEN_HOME') {
+					withMaven(maven : 'Maven 3.5') {
 						bat "mvn clean compile"
 						}
 					}
 				}
 			stage ('Testing Stage') {
 				steps {
-					withMaven(maven : 'MAVEN_HOME') { 
+					withMaven(maven : 'Maven 3.5') { 
 						bat "mvn test"
 					}
 				}
@@ -19,7 +19,7 @@ pipeline{
 			
 			stage ('Package Stage') {
 				steps {
-					withMaven(maven : 'MAVEN_HOME') {
+					withMaven(maven : 'Maven 3.5') {
 						bat "mvn package "
 					}
 				}
